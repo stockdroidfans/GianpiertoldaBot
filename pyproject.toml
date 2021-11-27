@@ -1,0 +1,7 @@
+[build-system]
+requires = [
+  "setuptools>=42",
+  "pyrogram", "tgcrypto", "discord",
+  "rich"
+]
+build-backend = "setuptools.build_meta"
