@@ -23,6 +23,18 @@ from rich.logging import RichHandler
 import pyrogram
 import discord
 
+''' Objects '''
+from lib import *
+from lib.base import *
+from lib.ui import *
+
+from lib.base.message import Message
+from lib.base.user import User
+from lib.base.chat import Chat
+
+from lib.ui.command import CommandManifest, Command
+from lib.ui.gui import Buttons, GUI
+
 #——————————————————#———————————————————#——————————————————#———————————————————#———————————————————#
 
 class Bot:
@@ -53,11 +65,11 @@ class Bot:
 			ascii_art = en_UK['defaults']['styling']['ascii_art']
 		else: ascii_art = art.text2art(self.name, font = 'small slant')
 
-		random_style = f\'''{
+		random_style = f"""{
 			random.choice(en_UK["defaults"]["styling"]["random_color"])
 		} {
 			random.choice(en_UK["defaults"]["styling"]["random_blink"])
-		}\'''
+		}"""
 		
 		random_text = random.choice(en_UK['defaults']['motd'])
 
@@ -102,6 +114,10 @@ class Bot:
 				*args, **kwargs
 			)
 		
+		def get(self,
+		*args, **kwargs) -> pyrogram.client.Client:
+			return self.client
+		
 		def on(self,
 		*args, **kwargs):
 			return self.client.start(*args, **kwargs)
@@ -110,9 +126,11 @@ class Bot:
 		*args, **kwargs):
 			return self.client.stop(*args, **kwargs)
 		
-		def get(self,
-		*args, **kwargs) -> pyrogram.types.User:
-			return self.client.get_me(*args, **kwargs)
+		def user(self,
+		*args, **kwargs) -> User:
+			return User.Telegram(
+				self.client.get_me(*args, **kwargs)
+			)
 		
 		def send(self,
 			chat: pyrogram.types.Chat or int,
@@ -120,7 +138,7 @@ class Bot:
 			entities: list = None,
 			embed: bool = True, notification: bool = True,
 			reply_to: pyrogram.types.Message or int = None, markup: str = '',
-		*args, **kwargs) -> pyrogram.types.Message:
+		*args, **kwargs) -> Message:
 			chat_id: int
 			if type(chat) == pyrogram.types.Chat: chat_id = chat.id
 			if type(chat) == int: chat_id = chat
@@ -141,7 +159,8 @@ class Bot:
 			)
 
 			while not self.client.is_connected: pass
-			self.client.send_message(*args, **kwargs)
+			try: self.client.send_photo(*args, **kwargs)
+			except: self.client.send_message(*args, **kwargs)
 
 	class Discord(discord.Client):
 		def __init__(self,
@@ -157,9 +176,11 @@ class Bot:
 		*args, **kwargs):
 			return self.clear(*args, **kwargs)
 		
-		def get_me(self,
-		*args, **kwargs) -> discord.User:
-			return self.user
+		def user(self,
+		*args, **kwargs) -> User:
+			return User.Discord(
+				self.user
+			)
 		
 		def send(self,
 			chat: discord.User or discord.Guild or discord.TextChannel or int,
@@ -167,7 +188,7 @@ class Bot:
 			entities: list = None,
 			embed: discord.Embed or bool = True, notification: bool = True,
 			reply_to: discord.Message = None,
-		*args, **kwargs) -> discord.Message:
+		*args, **kwargs) -> Message:
 			if type(chat) == int: utils.get_true([
 				self.get_user(chat), self.get_guild(chat), self.get_channel(chat)
 			])

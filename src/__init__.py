@@ -16,5 +16,14 @@ import gbot
 import utils
 
 from .lib import *
+from .lib.base import *
+from .lib.ui import *
+
+from .lib.base.message import Message
+from .lib.base.user import User
+from .lib.base.chat import Chat
+
+from .lib.ui.command import CommandManifest, Command
+from .lib.ui.gui import Buttons, GUI
 
 #———————————————————#———————————————————#—————————≠—————————#———————————————————#———————————————————#

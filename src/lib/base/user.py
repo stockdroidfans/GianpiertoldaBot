@@ -21,7 +21,7 @@
 # Imports
 ''' System '''
 import sys, os, time, logging, traceback
-from src.lib.exceptions.unsupported import UnsupportedError
+from ..exceptions.unsupported import UnsupportedError
 
 ''' Libraries '''
 import utils, json, html, random, hashlib, rich
@@ -57,7 +57,7 @@ class User:
 			return False
 		
 		def bot(self,
-		*args, **kwargs) -> telegram.Bot:
+		*args, **kwargs):
 			if self.bot: return self.bot
 			return None
 		

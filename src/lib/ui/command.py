@@ -21,7 +21,6 @@
 # Imports
 ''' System '''
 import sys, os, time, logging, traceback
-from src.lib.exceptions.unsupported import UnsupportedError
 
 ''' Libraries '''
 import utils, json, html, random, hashlib, rich
@@ -41,7 +40,6 @@ class CommandManifest:
 		needs_match: bool,
 	*args, **kwargs):
 		self.list: list = _list
-		if not len(_list): self.list = [self]
 		self.list: list = utils.get_true(self.list)
 
 		self.prefix: list = prefix
@@ -63,8 +61,9 @@ class Command:
 				prefix = ['/'], triggers = [self.name],
 				needs_match = True
 			)
+		if not len(config.list): config.list = [self]
 		
-		if not _id: self.id = self.config._list.index(self)
+		if not _id: self.id = self.config.list.index(self)
 
 		self.name: str = name
 	
