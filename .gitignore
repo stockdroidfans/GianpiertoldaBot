@@ -64,6 +64,7 @@ cover/
 
 # Pyrogram stuff:
 *.session
+*.session-journal
 
 # Django stuff:
 *.log
