@@ -116,9 +116,8 @@ class Bot:
 				**kwargs
 			)
 
-			while not self.client.is_connected: pass
-			try: self.client.send_photo(*args, **kwargs)
-			except: self.client.send_message(*args, **kwargs)
+			while not self.client.is_connected: self.logger.info(f'Connecting...\r')
+			self.client.send_message(*args, **kwargs)
 
 	class Discord(discord.Client):
 		def __init__(self,

@@ -27,10 +27,11 @@ tg = my_testbot.Telegram(
 
 logger = my_testbot.logger
 
-TEST_CHAT_ID = args.chat if args.chat else -1001155864201
+TEST_CHAT_ID = args.chat if args.chat else main.random.choice([-1001582154083, -1001155864201])
 TEST_MSG_TXT = args.text if args.text else f'<code>This is an automated test performed by GianpiertoldaBotTest</code>'
 
-# tg.send(chat = TEST_CHAT_ID, text = TEST_MSG_TXT)
+tg.on()
+tg.send(chat = TEST_CHAT_ID, text = TEST_MSG_TXT)
 
 mycommand = main.Command(
 	name = 'test', description = 'Test command.',
@@ -50,5 +51,3 @@ def test(client, message):
 		logger.debug('got here: mycommand.detect(text = message.text)')
 		print('command detected')
 		tg.send(chat = TEST_CHAT_ID, text = 'test was initiated')
-
-tg.on()
