@@ -50,52 +50,10 @@ class Bot:
 		self.name = name
 		self.logging = logging.basicConfig(**logger)
 		self.logger = logging.getLogger(__name__)
-
+	
 	def debug(self,
-	*args, **kwargs) -> logging.Logger:
-		self.logger.level = logging.DEBUG
-
-	'''
-	def motd(self,
-		text: str = None,
 	*args, **kwargs):
-		self.motd = text
-
-		if en_UK['defaults']['styling']['ascii_art'] is not None:
-			ascii_art = en_UK['defaults']['styling']['ascii_art']
-		else: ascii_art = art.text2art(self.name, font = 'small slant')
-
-		random_style = f"""{
-			random.choice(en_UK["defaults"]["styling"]["random_color"])
-		} {
-			random.choice(en_UK["defaults"]["styling"]["random_blink"])
-		}"""
-		
-		random_text = random.choice(en_UK['defaults']['motd'])
-
-		if not text: self.motd = en_UK['defaults']['startup_text'].format(
-			ascii_art = ascii_art,
-			random_style = random_style,
-			random_text = random_text
-		)
-
-		separator_text = en_UK["defaults"]["styling"]["separator"]
-
-		terminal_width = shutil.get_terminal_size((100, 25))[0]
-		separators = round((terminal_width / len(en_UK['defaults']['styling']['separator'])))
-
-		separator = []
-		for sep in range(separators)[:-1]:
-			if not len(separator):
-				separator.append(f'[{random_style}]{separator_text}[/{random_style}]')
-			if separator[sep - 1].endswith(en_UK["defaults"]["styling"]["separator"][-1]):
-				separator.append(f'[{random_style}]{separator_text[1:-1]}[/{random_style}]')
-			if sep == len(separator) - 1:
-				separator.append(f'[{random_style}]{separator_text[1:]}[/{random_style}]')
-
-		print(self.motd, end = '\n\n')
-		print(*separator, sep = '', end = f'\n\n')
-	'''
+		self.logger.level = logging.DEBUG
 
 	class Telegram(pyrogram.client.Client):
 		def __init__(self,
@@ -189,9 +147,9 @@ class Bot:
 			embed: discord.Embed or bool = True, notification: bool = True,
 			reply_to: discord.Message = None,
 		*args, **kwargs) -> Message:
-			if type(chat) == int: utils.get_true([
+			if type(chat) == int: chat = utils.true([
 				self.get_user(chat), self.get_guild(chat), self.get_channel(chat)
-			])
+			])[0]
 			
 			if type(embed) == discord.Embed: embed = embed
 			if type(embed) == bool: embed = None

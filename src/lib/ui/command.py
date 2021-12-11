@@ -40,10 +40,10 @@ class CommandManifest:
 		needs_match: bool,
 	*args, **kwargs):
 		self.list: list = _list
-		self.list: list = utils.get_true(self.list)
+		self.list: list = utils.true(self.list)
 
 		self.prefix: list = prefix
-		self.triggers: list = utils.get_true(triggers)
+		self.triggers: list = utils.true(triggers)
 		self.needs_match: bool = needs_match
 
 class Command:

@@ -38,10 +38,10 @@ class CacheFullError(Exception): pass
 class Cache:
 	'''
 		Creates a new cache object. Caches are used to temporarily store data in
-		arrays with specific properties and will be reset once memory is cleared
+		lists with specific properties and will be reset once memory is cleared
 		or the program terminates.
 
-		To get the array object, use the `.get()` method.
+		To get the list object, use the `.get()` method.
 
 		---
 
@@ -67,6 +67,7 @@ class Cache:
 		threshold: int = 512, accepts: list = [],
 	*args, **kwargs):
 		self.threshold = threshold
+		# If the list is empty (len(accepts) == false), then any value can be accepted
 		self.accepts = accepts if len(accepts) else True
 		
 		self.array: list
@@ -76,79 +77,56 @@ class Cache:
 		return self.array
 	
 	def store(self,
-		obj,
+		object,
 	*args, **kwargs):
+		# Checks if the amount of objects already in cache exceed the given threshold
 		if len(self.array) <= self.threshold:
-			if type(obj) in self.accepts or self.accepts:
-				self.array.append(obj)
-			else: raise TypeError(f'cache does not accept {type(obj)} (cache only accepts {", ".join(self.accepts[0:-2]) + " and " + self.accepts[:-1]})')
+			# Checks if cache can accept this object, or if self.accepts is True
+			if type(object) in self.accepts or self.accepts:
+				self.array.append(object) # append the object
+			else: raise TypeError(f'cache does not accept {type(object)} (cache only accepts {", ".join(self.accepts[0:-2]) + " and " + self.accepts[:-1]})')
 		else: raise CacheFullError(f'cache is full (hit the threshold of {self.threshold})')
 
-class Log: pass
+class Log: pass # under construction
 
-class Stringtable:
-	class StringtableValue:
-		def __init__(self,
-			name: str, content,
-		*args, **kwargs):
-			self.name = name
-			self.content = content
-		
-		def get(self,
-		*args, **kwargs) -> dict:
-			{self.name: self.content}
-	
-	def __init__(self,
-		lang_code: str, lang: str,
-	*args, **kwargs):
-		self.language_code = lang_code
-		self.language = lang
-
-		self.table: dict
-	
-	def get(self,
-	*args, **kwargs):
-		return self.table
-	
-	def add_value(self,
-	*args: StringtableValue, **kwargs):
-		for arg in args:
-			self.get()[arg.name] = arg.content
-			return arg.get()
-
-def get_true(
-	array: list or tuple or dict or set,
+def true(
+	object, fallback = None,
 *args, **kwargs):
 	'''
-		Removes the items in an array which aren't true.
+		Returns the object if it's true, else returns a fallback value.
+		If an array is given, removes the objects in an array which are
+		false.
 
 		---
 
 		```python
 			from gianpiertolda import utils
+			from utils import true
 
-			list1 = [0, '', 1, True, 255]
-			list2 = [0, False, None, '']
-			tupl3 = (1, True, 'text', 23)
-			set_4 = {4, False, True, 0}
-			dict5 = {'i': True, 'a': False, 'b': 'hello'}
+			my_number = 2
+			something = False
+			my_list = [0, '', 1, True, 255]
+			my_dict = {'i': True, 'a': False, 'b': 'hello'}
 
-			utils.only(list1) # [1, True, 255]
-			utils.only(list2) # None
-			utils.only(tupl3) # (1, True, 'text', 23)
-			utils.only(set_4) # {4, True}
-			utils.only(dict5) # {'i', 'a', 'b'}
+			true(2) # 2
+			true('', fallback = 727) # 727
+			true(0) # None
+			true([0, '', 1, True, 255]) # [1, True, 255]
 		```
 
 		---
 
 		| Argument | Type | Default | Description |
 		| -------- | ---- | ------- | ----------- |
-		| `array` | `list` or `tuple` or `dict` or `set` | | |
+		| `object` | Any | | Object to evaluate |
+		| `fallback` | Any | `None` | Return value if `object` is false |
 	'''
-	for i, x in enumerate(array):
-		if not x: array.remove(x)
-	return array
+	if object: return object
+	if type(object) in (list, tuple, set, dict):
+		for i, x in enumerate(object):
+			if not x: object.remove(x)
+		return object
+	return fallback
 
 def find(
 	array: list or tuple,
@@ -166,7 +144,7 @@ def find(
 
 			foo = [
 				{'id': 104, 'content': 'hello world'},
-				{'id': 255, 'content': 'hello galaxy!'}
+				{'id': 255, 'content': 'hello galaxy'}
 			]
 
 			bar = utils.find(foo, 'id', 104) # 0

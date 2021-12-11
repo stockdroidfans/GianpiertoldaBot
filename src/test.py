@@ -1,6 +1,8 @@
 # chat
 import main
 import argparse
+import logging
+from pyrogram import filters
 
 # Instantiate the parser
 parser = argparse.ArgumentParser(
@@ -23,26 +25,30 @@ tg = my_testbot.Telegram(
 	client_name = 'Gianpiertolda'
 )
 
-TEST_CHAT_ID= args.chat if args.chat else -1001155864201
-TEST_MSG_TXT =args.text if args.text else f'<code>This is an automated test performed by GianpiertoldaBotTest</code>'
+logger = my_testbot.logger
+
+TEST_CHAT_ID = args.chat if args.chat else -1001155864201
+TEST_MSG_TXT = args.text if args.text else f'<code>This is an automated test performed by GianpiertoldaBotTest</code>'
+
+# tg.send(chat = TEST_CHAT_ID, text = TEST_MSG_TXT)
+
+mycommand = main.Command(
+	name = 'test', description = 'Test command.',
+	config = main.CommandManifest(
+		_list = [],
+		prefix = ['/', '.', '!'], triggers = ['test2'],
+		needs_match = False
+	)
+)
+
+@tg.client.on_message(filters.command("test"))
+def test(client, message):
+	logger.debug('got here: tg.client.on_message(test)')
+	print(mycommand)
+	print(mycommand.detect(text = 'test'))
+	if mycommand.detect(text = message.text):
+		logger.debug('got here: mycommand.detect(text = message.text)')
+		print('command detected')
+		tg.send(chat = TEST_CHAT_ID, text = 'test was initiated')
 
 tg.on()
-tg.send(chat = TEST_CHAT_ID, text = TEST_MSG_TXT)
-
-while True:
-	mycommand = main.Command(
-		name = 'test', description = 'Test command.',
-		config = main.CommandManifest(
-			_list = [],
-			prefix = ['/', '.', '!'], triggers = ['test2'],
-			needs_match = False
-		)
-	)
-
-	@tg.client.on_message()
-	def test(client, message):
-		print(mycommand)
-		print(mycommand.detect(text = 'test'))
-		if mycommand.detect(text = message.text):
-			print('got here')
-			tg.send(chat = TEST_CHAT_ID, text = 'test was initiated')

@@ -48,7 +48,7 @@ class Message:
 				self.audio, self.video_note, self.document, self.game, self.dice,
 				self.contact, self.location, self.venue, self.invoice, self.chat_action
 			] # TODO: there's actually quite a lot more of these!
-			self.content = utils.get_true(valid_content)
+			self.content = utils.true(valid_content)
 			return self.content
 	
 	class Discord(discord.Message):
