@@ -1,7 +1,7 @@
 <div id="intro" align="center">
 
-## <img src='https://dslv9ilpbe7p1.cloudfront.net/Cj7cYvaXaoyQ386pQ2yIjw_store_logo_image.png' width='25'/> Stockdroid Fans
-# <img src='https://cdn4.telesco.pe/file/DtGlv0sVkpi0yRoHc2wyiEejS0Y-UUgBRj6b8pw8viBe3KZApWgTBK4jclvKq0Zc6u4aR4Z9jRv15aV-KZG4HN2uUh1K6LZzjx8XX3MIWwftcjKT-s_-aZgz5rfsvfwpic9tCoeX2i5IHSkQSrXbwP0AQ4wjyRZqcC8yttYoFaU6-ZW0vfl56DsHyDtkRPj8rJ7PRjF-zc88V4xf1dyiIot-rGdl2WngxltUjiPItHzISHzMvx7jciSI3xn3wspbNbPqT-3_VI-EVTmJ14ZJKekQ1S7P0Mn1LAUz3VraTjWYQW3GdXf_f0f0d95AjkXDGOcJKVTSKHiVreDjurmrFg.jpg' width='80'/> <br/> GianpiertoldaBot
+## <img src='https://github.com/stockdroidfans/stockdroidfans/blob/main/assets/stockdroidfans.png?raw=true' width='25'/> Stockdroid Fans
+# <img src='https://cdn4.telesco.pe/file/KJecBN4_YJBkP1kcaJg0k8c1aWAr--OOTLmWKKZnz4bLAwTHLFOoswJhXGsrcrOQqf2xLwKfjkjbN_36IqgSEXr1ACx4-1ICiHrpgksfAWE6XuAQa0OfyGssrA3_RgiSFk0xmiAto2w3qG_nknZUdrh9ESVjyIsAXXG0PA0Keh7iZV73Ex5fjIwHwEbfRNJ6HCiP74vITAbLZpcNkHlFJpDSlc0bBnRRTtBh-4twQcj2cnmhVuI0ueZzheFYqosqH1A5uG-3JfO3wNt9OGmmMfGEeOolfGXcZNr8CH4q1uy7DXxlLHCA1QlDv-RG6dOcxirGCR_sLV1-7awx_n8Uug.jpg' width='80'/> <br/> GianpiertoldaBot
 ## Il bot multipiattaforma marso
 ![image](https://img.shields.io/badge/dynamic/json?color=blue&logo=telegram&label=messaggi%20ricevuti&query=result.pinned_message.message_id&suffix=%2B&url=https%3A%2F%2Fapi.telegram.org%2Fbot5091331620%3AAAEleQrALOv8urnie0I-quzbc1-SuhkixDw%2FgetChat%3Fchat_id%3D%40stockdroidfans)
 
