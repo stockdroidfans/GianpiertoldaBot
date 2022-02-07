@@ -39,7 +39,7 @@ class Message:
 		*args, **kwargs):
 			self.id = self.message_id
 			self.content = self.get_content()
-			if len(self.content) is 1: self.content = self.content[0]
+			if len(self.content) == 1: self.content = self.content[0]
 		
 		def get_content(self,
 		*args, **kwargs):

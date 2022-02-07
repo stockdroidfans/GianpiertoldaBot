@@ -11,8 +11,6 @@
 #——————————————————#———————————————————#——————————————————#———————————————————#———————————————————#
 
 # Imports
-from main import *
-import gbot
 import utils
 
 from .base import *

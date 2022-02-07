@@ -24,6 +24,6 @@ from .lib.base.user import User
 from .lib.base.chat import Chat
 
 from .lib.ui.command import CommandManifest, Command
-from .lib.ui.gui import Buttons, GUI
+from .lib.ui.gui import Buttons, Gui
 
 #———————————————————#———————————————————#—————————≠—————————#———————————————————#———————————————————#
