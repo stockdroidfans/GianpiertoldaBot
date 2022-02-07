@@ -66,6 +66,9 @@ cover/
 *.session
 *.session-journal
 
+# Testing
+test.py
+
 # Django stuff:
 *.log
 local_settings.py
