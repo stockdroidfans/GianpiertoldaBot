@@ -33,7 +33,7 @@ from lib.base.user import User
 from lib.base.chat import Chat
 
 from lib.ui.command import CommandManifest, Command
-from lib.ui.gui import Buttons, GUI
+from lib.ui.gui import Buttons, Gui
 
 #——————————————————#———————————————————#——————————————————#———————————————————#———————————————————#
 
@@ -138,7 +138,7 @@ class Bot:
 			return User.Discord(
 				self.user
 			)
-		
+
 		def send(self,
 			chat: discord.User or discord.Guild or discord.TextChannel or int,
 			parser: str = 'html',
