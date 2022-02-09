@@ -29,6 +29,7 @@ from lib.base import *
 from lib.ui import *
 
 from lib.base.message import Message
+from lib.base.media import Media
 from lib.base.user import User
 from lib.base.chat import Chat
 
@@ -91,33 +92,39 @@ class Bot:
 			)
 		
 		def send(self,
-			chat: pyrogram.types.Chat or int,
+			chat: pyrogram.types.Chat or int or str,
+			text: str = '', media: Media or str = None,
 			parser: str = 'html',
 			entities: list = None,
-			embed: bool = True, notification: bool = True,
+			embed: bool = True, notify: bool = True,
 			reply_to: pyrogram.types.Message or int = None, markup: str = '',
 		*args, **kwargs) -> Message:
-			chat_id: int
+			chat_id: int = None
 			if type(chat) == pyrogram.types.Chat: chat_id = chat.id
 			if type(chat) == int: chat_id = chat
-			else: chat_id = None
 
-			reply_to_message_id: int
+			if type(media) == str: media = Media.Telegram(media)
+
+			reply_to_message_id: int = None
 			if type(reply_to) == pyrogram.types.Message: reply_to_message_id = reply_to.message_id
 			if type(reply_to) == int: reply_to_message_id = reply_to
-			else: reply_to_message_id = None
 
+			caption: str = text
+			if media and media.caption: caption = media.caption
+			
 			kwargs = dict(
 				chat_id = chat_id,
+				text = text,
 				parse_mode = parser,
 				entities = entities,
-				disable_web_page_preview = not embed, disable_notification = not notification,
+				disable_web_page_preview = not embed,
+				disable_notification = not notify,
 				reply_to_message_id = reply_to_message_id,
-				**kwargs
+				**kwargs,
 			)
 
 			while not self.client.is_connected: self.logger.info(f'Connecting...\r')
-			self.client.send_message(*args, **kwargs)
+			return self.client.send_message(*args, **kwargs)
 
 	class Discord(discord.Client):
 		def __init__(self,
