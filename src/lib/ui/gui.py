@@ -9,10 +9,10 @@
 
 	---
 
-	Host for `gianpiertolda.GUI`
+	Host for `gianpiertolda.Gui`
 
 	```
-	from gianpiertolda import GUI
+	from gianpiertolda import Gui
 	```
 '''
 
