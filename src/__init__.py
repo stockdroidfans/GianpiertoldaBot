@@ -12,7 +12,7 @@
 
 # Imports
 from main import *
-import gbot
+import 
 import utils
 
 from .lib import *

@@ -15,7 +15,7 @@
 import sys, os, time, logging, asyncio, traceback, shutil
 
 ''' Libraries '''
-import utils, gbot, json, html, random, hashlib, rich
+import utils, json, html, random, hashlib, rich
 from rich import print
 from rich.logging import RichHandler
 
@@ -123,7 +123,7 @@ class Bot:
 				**kwargs,
 			)
 
-			while not self.client.is_connected: self.logger.info(f'Connecting...\r')
+			while not self.client.is_connected: pass
 			return self.client.send_message(*args, **kwargs)
 
 	class Discord(discord.Client):
